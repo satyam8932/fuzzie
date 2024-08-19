@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { X } from 'lucide-react'
+import UploadCareButton from './uploadcare-button'
 
 type Props = {
   userImage: string | null
@@ -43,8 +44,7 @@ const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
             </Button>
           </>
         ) : (
-        //   <UploadCareButton onUpload={onUpload} />
-        <></>
+          <UploadCareButton onUpload={onUpload} />
         )}
       </div>
     </div>
