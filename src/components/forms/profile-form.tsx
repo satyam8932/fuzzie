@@ -28,8 +28,8 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
     mode: 'onChange',
     resolver: zodResolver(EditUserProfileSchema),
     defaultValues: {
-      name: user.name,
-      email: user.email,
+      name: "user.name",
+      email: "user.email",
     },
   })
 
@@ -77,7 +77,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
               <FormControl>
                 <Input
                   {...field}
-                  disabled={true}
+                  disabled={true}  // Because a user can't change the email after creating account
                   placeholder="Email"
                   type="email"
                 />
