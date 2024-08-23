@@ -57,7 +57,7 @@ const ProfileForm = ({ user, onUpdate }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-lg">User full name</FormLabel>
+              <FormLabel className="text-lg">User Full Name</FormLabel>
               <FormControl>
                 <Input
                   {...field}

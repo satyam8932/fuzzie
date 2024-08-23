@@ -1,41 +1,46 @@
-'use client'; // Required if using React Server Components
-
-import { FileUploaderRegular } from '@uploadcare/react-uploader';
-import '@uploadcare/react-uploader/core.css';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+'use client'
+import React, { useEffect, useRef } from 'react'
+import * as LR from '@uploadcare/blocks'
+import { useRouter } from 'next/navigation'
 
 type Props = {
-  onUpload?: (cdnURL: string) => Promise<any>;
-};
+  onUpload: (e: string) => any
+}
+
+LR.registerBlocks(LR)
 
 const UploadCareButton = ({ onUpload }: Props) => {
-  const router = useRouter();
+  const router = useRouter()
+  const ctxProviderRef = useRef<typeof LR.UploadCtxProvider.prototype & LR.UploadCtxProvider>(null)
 
   useEffect(() => {
     const handleUpload = async (e: any) => {
-      if (onUpload) {
-        const file = await onUpload(e.detail.cdnUrl); // Use `cdnUrl` instead of `cdnURL`
-        if (file) {
-          router.refresh();
-        }
+      const file = await onUpload(e.detail.cdnUrl)
+      if (file) {
+        router.refresh()
       }
-    };
-
-    // Add the event listener
-    window.addEventListener('uploadcare-uploader-complete', handleUpload);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener('uploadcare-uploader-complete', handleUpload);
-    };
-  }, [onUpload, router]);
+    }
+    ctxProviderRef.current.addEventListener('file-upload-success', handleUpload)
+  }, [])
 
   return (
     <div>
-      <FileUploaderRegular pubkey="6d67bf79234350e54e40" />
-    </div>
-  );
-};
+      <lr-config
+        ctx-name="my-uploader"
+        pubkey={process.env.NEXT_PUBLIC_UPLOADCARE_PUBLISHER_KEY}
+      />
 
-export default UploadCareButton;
+      <lr-file-uploader-regular
+        ctx-name="my-uploader"
+        css-src={process.env.NEXT_PUBLIC_UPLOAD_CARE_CSS_SRC as string}
+      />
+
+      <lr-upload-ctx-provider
+        ctx-name="my-uploader"
+        ref={ctxProviderRef}
+      />
+    </div>
+  )
+}
+
+export default UploadCareButton

@@ -15,9 +15,10 @@ type Props = {
 
 const ProfilePicture = ({ userImage, onDelete, onUpload }: Props) => {
   const router = useRouter()
-
   const onRemoveProfileImage = async () => {
     const response = await onDelete()
+    // console.log('here is prisma remove profile image')
+    // console.log(response)
     if (response) {
       router.refresh()
     }
