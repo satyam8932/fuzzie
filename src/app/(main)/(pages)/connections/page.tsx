@@ -128,4 +128,4 @@ const Connections = async (props: Props) => {
   )
 }
 
-export default Connections
+export default Connections;
