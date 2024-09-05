@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from '@/components/sidebar/index'
-import InfoBar from '@/components/infobar/infobar'
+import InfoBar from '@/components/infobar/index'
 
 type Props = { children: React.ReactNode }
 

@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import React, { useEffect } from 'react'
 import { Separator } from '@/components/ui/separator'
-import { CONNECTIONS, EditorCanvasDefaultCardTypes } from '@/lib/constant'
+import { CONNECTIONS, EditorCanvasDefaultCardTypes } from '@/lib/constants'
 import {
   Card,
   CardDescription,
@@ -18,7 +18,7 @@ import {
   onConnections,
   onDragStart,
 } from '@/lib/editor-utils'
-import EditorCanvasIconHelper from './editor-canvas-card-icon-hepler'
+import EditorCanvasIconHelper from './editor-canvas-card-icon-helper'
 import {
   Accordion,
   AccordionContent,
